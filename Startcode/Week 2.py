@@ -12,7 +12,7 @@ def main():
     recept1 = Recept("Kwetiau Ayam", "Gewokte rijstnoedels met kip en chinese kool.")
 
     # Voeg ingrediënten toe
-    recept1.voeg_ingredient_toe(Ingredient("kip", 500, "gram"))
+    recept1.voeg_ingredient_toe(Ingredient("kip", 500, "gram", plantaardig_alternatief="tofu"))
     recept1.voeg_ingredient_toe(Ingredient("chinese kool", 400, "gram"))
     recept1.voeg_ingredient_toe(Ingredient("kwetiau rijstnoedels", 250, "gram"))
 
@@ -31,7 +31,7 @@ def main():
 
     # Voeg ingrediënten toe
     recept2.voeg_ingredient_toe(Ingredient("rendang boemboe", 1, "stuk"))
-    recept2.voeg_ingredient_toe(Ingredient("sucadelappen", 1, "kilo"))
+    recept2.voeg_ingredient_toe(Ingredient("sucadelappen", 1, "kilo", plantaardig_alternatief="jackfruit"))
     recept2.voeg_ingredient_toe(Ingredient("kokosmelk", 400, "ml"))
     recept2.voeg_ingredient_toe(Ingredient("water", 200, "ml"))
     recept2.voeg_ingredient_toe(Ingredient("laos", 2, "cm"))
@@ -54,7 +54,7 @@ def main():
 
     # Zelfde voor recept3
     recept3 = Recept("Babi Pangang", "Noord-Sumatraanse buikspek.") 
-    recept3.voeg_ingredient_toe(Ingredient("hamlappen", 500, "gram"))
+    recept3.voeg_ingredient_toe(Ingredient("hamlappen", 500, "gram", plantaardig_alternatief="tempeh"))
     recept3.voeg_ingredient_toe(Ingredient("knoflook", 1, "teen"))
     recept3.voeg_ingredient_toe(Ingredient("ui", 1, "stuk"))
     recept3.voeg_ingredient_toe(Ingredient("oestersaus", 2, "eetlepels"))

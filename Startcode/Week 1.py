@@ -1,5 +1,5 @@
-
-from recept import Recept, Ingredient
+from recept import Recept
+from ingredient import Ingredient
 from stap import Stap
 
 def main():
