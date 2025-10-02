@@ -74,7 +74,16 @@ def main():
                                        
     recepten.append(recept3)
 
+    recept4 = Recept("Sajoer Lodeh", "Groentencurry in kokosmelk.")
+    recept4.voeg_ingredient_toe(Ingredient("wortel", 2, "stukken"))
+    recept4.voeg_ingredient_toe(Ingredient("sperziebonen", 200, "gram"))
+    recept4.voeg_ingredient_toe(Ingredient("kousenband", 100, "gram"))
+    recept4.voeg_ingredient_toe(Ingredient("aubergine", 1, "stuk"))
+    recept4.voeg_ingredient_toe(Ingredient("courgette", 1, "stuk"))
+    recept4.voeg_ingredient_toe(Ingredient("kokosmelk", 400, "ml"))
+    recept4.voeg_ingredient_toe(Ingredient("sajoer lodeh boemboe", 1, "zakje"))
 
+    recepten.append(recept4)
 
     # Print automatisch alle recepten
     for recept in recepten:

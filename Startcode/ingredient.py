@@ -1,5 +1,4 @@
 from stap import Stap
-from ingredient import Ingredient
 
 class Recept:
     def __init__(self, naam, omschrijving):
@@ -19,3 +18,14 @@ class Recept:
 
     def get_stappen(self):
         return self.__stappen
+
+# Ingredient class 
+class Ingredient:
+    def __init__(self, naam, hoeveelheid, eenheid):
+        self.naam = naam
+        self.hoeveelheid = hoeveelheid
+        self.eenheid = eenheid
+
+    def __str__(self):
+        return f"{self.hoeveelheid} {self.eenheid} {self.naam}"
+    
