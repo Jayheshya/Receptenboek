@@ -2,6 +2,7 @@ from recept import Recept
 from ingredient import Ingredient
 from stap import Stap
 from hoeveelheden import pas_hoeveelheden_aan
+from plantaardig import PlantaardigAlternatief
 
 def main():
 
@@ -12,9 +13,9 @@ def main():
     recept1 = Recept("Kwetiau Ayam", "Gewokte rijstnoedels met kip en chinese kool.")
 
     # Voeg ingrediënten toe (voorbeeld kcal-waardes)
-    recept1.voeg_ingredient_toe(Ingredient("kip", 500, "gram", plantaardig_alternatief="tofu", kcal=550))
-    recept1.voeg_ingredient_toe(Ingredient("chinese kool", 400, "gram", kcal=40))
-    recept1.voeg_ingredient_toe(Ingredient("kwetiau rijstnoedels", 250, "gram", kcal=900))
+    recept1.voeg_ingredient_toe(Ingredient("kip", 125, "gram", plantaardig_alternatief=PlantaardigAlternatief("tofu", 80), kcal=138))
+    recept1.voeg_ingredient_toe(Ingredient("chinese kool", 100, "gram", kcal=10))
+    recept1.voeg_ingredient_toe(Ingredient("kwetiau rijstnoedels", 62.5, "gram", kcal=225))
 
     # Voeg stappen toe aan het recept
     recept1.voeg_stap_toe(Stap("Snijd de kip in reepjes."))
@@ -30,16 +31,16 @@ def main():
     recept2 = Recept("Rendang", "Traditioneel West-Sumatraans rundvlees gerecht.")
 
     # Voeg ingrediënten toe
-    recept2.voeg_ingredient_toe(Ingredient("rendang boemboe", 1, "stuk", kcal=100))
-    recept2.voeg_ingredient_toe(Ingredient("sucadelappen", 1, "kilo", plantaardig_alternatief="jackfruit", kcal=1800))
-    recept2.voeg_ingredient_toe(Ingredient("kokosmelk", 400, "ml", kcal=800))
-    recept2.voeg_ingredient_toe(Ingredient("water", 200, "ml", kcal=0))
-    recept2.voeg_ingredient_toe(Ingredient("laos", 2, "cm", kcal=5))
-    recept2.voeg_ingredient_toe(Ingredient("sereh", 2, "stengels", kcal=5))
-    recept2.voeg_ingredient_toe(Ingredient("kaneel", 1, "stokje", kcal=5))
-    recept2.voeg_ingredient_toe(Ingredient("gula djawa", 2, "el", kcal=80))
-    recept2.voeg_ingredient_toe(Ingredient("zout", 1, "tl", kcal=0))    
-    recept2.voeg_ingredient_toe(Ingredient("rijst", 300, "gram", kcal=1050))
+    recept2.voeg_ingredient_toe(Ingredient("rendang boemboe", 1, "stuk", kcal=25))
+    recept2.voeg_ingredient_toe(Ingredient("sucadelappen", 250, "gram", plantaardig_alternatief=PlantaardigAlternatief("jackfruit", 40), kcal=450))
+    recept2.voeg_ingredient_toe(Ingredient("kokosmelk", 100, "ml", kcal=200))
+    recept2.voeg_ingredient_toe(Ingredient("water", 50, "ml", kcal=0))
+    recept2.voeg_ingredient_toe(Ingredient("laos", 2, "cm", kcal=1))
+    recept2.voeg_ingredient_toe(Ingredient("sereh", 2, "stengels", kcal=1))
+    recept2.voeg_ingredient_toe(Ingredient("kaneel", 1, "stokje", kcal=1))
+    recept2.voeg_ingredient_toe(Ingredient("gula djawa", 0.5, "el", kcal=20))
+    recept2.voeg_ingredient_toe(Ingredient("zout", 0.25, "tl", kcal=0))    
+    recept2.voeg_ingredient_toe(Ingredient("rijst", 75, "gram", kcal=263))
 
     # Voeg stappen toe aan het recept
     recept2.voeg_stap_toe(Stap("Snijd het vlees in blokjes van 2 cm."))
@@ -54,15 +55,15 @@ def main():
 
     # Zelfde voor recept3
     recept3 = Recept("Babi Pangang", "Noord-Sumatraanse buikspek.") 
-    recept3.voeg_ingredient_toe(Ingredient("hamlappen", 500, "gram", plantaardig_alternatief="tempeh", kcal=1200))
+    recept3.voeg_ingredient_toe(Ingredient("hamlappen", 125, "gram", plantaardig_alternatief=PlantaardigAlternatief("tempeh", 170), kcal=300))
     recept3.voeg_ingredient_toe(Ingredient("knoflook", 1, "teen", kcal=5))
     recept3.voeg_ingredient_toe(Ingredient("ui", 1, "stuk", kcal=30))
-    recept3.voeg_ingredient_toe(Ingredient("oestersaus", 2, "eetlepels", kcal=40))
-    recept3.voeg_ingredient_toe(Ingredient("ketjap manis", 2, "eetlepels", kcal=60))
-    recept3.voeg_ingredient_toe(Ingredient("sambal oelek", 1, "theelepel", kcal=5))
+    recept3.voeg_ingredient_toe(Ingredient("oestersaus", 0.5, "eetlepel", kcal=10))
+    recept3.voeg_ingredient_toe(Ingredient("ketjap manis", 0.5, "eetlepel", kcal=15))
+    recept3.voeg_ingredient_toe(Ingredient("sambal oelek", 0.25, "theelepel", kcal=1))
     recept3.voeg_ingredient_toe(Ingredient("gember", 1, "cm", kcal=2))
-    recept3.voeg_ingredient_toe(Ingredient("palm suiker", 1, "theelepel", kcal=20))
-    recept3.voeg_ingredient_toe(Ingredient("maizena", 1, "eetlepel", kcal=35))
+    recept3.voeg_ingredient_toe(Ingredient("palm suiker", 0.25, "theelepel", kcal=5))
+    recept3.voeg_ingredient_toe(Ingredient("maizena", 0.25, "eetlepel", kcal=9))
 
     recept3.voeg_stap_toe(Stap("Snij de hamlappen in dunne repen en marineer het met de rest van ingrediënten voor de marinade."))
     recept3.voeg_stap_toe(Stap("Laat het vlees nu minimaal 1 uur of langer marineren."))
@@ -76,13 +77,13 @@ def main():
     recepten.append(recept3)
 
     recept4 = Recept("Sajoer Lodeh", "Groentencurry in kokosmelk.")
-    recept4.voeg_ingredient_toe(Ingredient("wortel", 2, "stukken", kcal=60))
-    recept4.voeg_ingredient_toe(Ingredient("sperziebonen", 200, "gram", kcal=60))
-    recept4.voeg_ingredient_toe(Ingredient("kousenband", 100, "gram", kcal=30))
-    recept4.voeg_ingredient_toe(Ingredient("aubergine", 1, "stuk", kcal=25))
-    recept4.voeg_ingredient_toe(Ingredient("courgette", 1, "stuk", kcal=20))
-    recept4.voeg_ingredient_toe(Ingredient("kokosmelk", 400, "ml", kcal=800))
-    recept4.voeg_ingredient_toe(Ingredient("sajoer lodeh boemboe", 1, "zakje", kcal=100))
+    recept4.voeg_ingredient_toe(Ingredient("wortel", 0.5, "stuk", kcal=15))
+    recept4.voeg_ingredient_toe(Ingredient("sperziebonen", 50, "gram", kcal=15))
+    recept4.voeg_ingredient_toe(Ingredient("kousenband", 25, "gram", kcal=8))
+    recept4.voeg_ingredient_toe(Ingredient("aubergine", 0.25, "stuk", kcal=6))
+    recept4.voeg_ingredient_toe(Ingredient("courgette", 0.25, "stuk", kcal=5))
+    recept4.voeg_ingredient_toe(Ingredient("kokosmelk", 100, "ml", kcal=200))
+    recept4.voeg_ingredient_toe(Ingredient("sajoer lodeh boemboe", 0.25, "zakje", kcal=25))
 
     recepten.append(recept4)
 
@@ -92,27 +93,44 @@ def main():
     except ValueError:
         aantal_personen = 4
 
+    # Vraag of plantaardig alternatief gewenst is 
+    # elk antwoord ander dan een variatia van ja wordt geïnterpreteerd als nee
+    plantaardig = input("Wil je een plantaardige versie? (ja/nee): ").strip().lower() == "ja"
+
     # Print automatisch alle recepten met aangepaste hoeveelheden en kcal
     for recept in recepten:
         print(f"\nIngrediënten voor {recept._Recept__naam} (voor {aantal_personen} personen):")
-        aangepaste_ingredienten = pas_hoeveelheden_aan(recept.get_ingredienten(), aantal_personen)
-        totale_kcal = 0
         factor = aantal_personen / 4
-        for i, ingredient in enumerate(recept.get_ingredienten()):
-            # Bereken kcal per ingrediënt
+        totale_kcal = 0
+        for ingredient in recept.get_ingredienten():
+            # Bepaal naam
+            if plantaardig and ingredient.plantaardig_alternatief:
+                naam = str(ingredient.plantaardig_alternatief)
+                alternatief_str = " (plantaardig alternatief)"
+            else:
+                naam = ingredient.naam
+                alternatief_str = ""
+
+            # Bepaal hoeveelheid
+            try:
+                hoeveelheid = float(ingredient.hoeveelheid) * factor
+                hoeveelheid = int(hoeveelheid) if hoeveelheid.is_integer() else round(hoeveelheid, 2)
+            except (ValueError, TypeError):
+                hoeveelheid = ingredient.hoeveelheid
+
+            # Bepaal kcal
             try:
                 kcal = float(ingredient.kcal) * factor
-            except ValueError:
+            except (ValueError, TypeError):
                 kcal = 0
             totale_kcal += kcal
-            print(f"- {aangepaste_ingredienten[i]}")
+
+            print(f"- {hoeveelheid} {ingredient.eenheid} {naam}{alternatief_str} [{int(kcal)} kcal]")
         print("Stappen:")
         for stap in recept.get_stappen():
             print(f"- {stap.beschrijving}")
         print(f"Totale kcal per persoon: {int(totale_kcal // aantal_personen)} kcal")
 
-    # enzovoort...
-    # Veel succes!
 
 if __name__ == "__main__":
     main()
