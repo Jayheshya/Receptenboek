@@ -4,9 +4,42 @@ from stap import Stap
 from hoeveelheden import pas_hoeveelheden_aan
 from plantaardig import PlantaardigAlternatief
 
+def voeg_recept_toe():
+    naam = input("Voer de naam van het recept in: ")
+    omschrijving = input("Voer een korte omschrijving in: ")
+    recept = Recept(naam, omschrijving)
+
+    # Voeg ingrediënten toe
+    while True:
+        toevoegen = input("Wil je een ingredient toevoegen? (ja/nee): ").strip().lower()
+        if toevoegen != "ja":
+            break
+        naam_ing = input("Naam van het ingredient: ")
+        hoeveelheid = input("Hoeveelheid: ")
+        eenheid = input("Eenheid (bijv. gram, ml): ")
+        kcal = int(input("Kcal per persoon: "))
+        plantaardig = input("Is er een plantaardig alternatief? (ja/nee): ").strip().lower()
+        if plantaardig == "ja":
+            alt_naam = input("Naam van plantaardig alternatief: ")
+            alt_kcal = int(input("Kcal van alternatief: "))
+            alt = PlantaardigAlternatief(alt_naam, alt_kcal)
+        else:
+            alt = None
+        ingredient = Ingredient(naam_ing, hoeveelheid, eenheid, alt, kcal)
+        recept.voeg_ingredient_toe(ingredient)
+
+    # Voeg stappen toe
+    while True:
+        toevoegen = input("Wil je een stap toevoegen? (ja/nee): ").strip().lower()
+        if toevoegen != "ja":
+            break
+        beschrijving = input("Beschrijving van de stap: ")
+        stap = Stap(beschrijving)
+        recept.voeg_stap_toe(stap)
+
+    return recept
+
 def main():
-
-
     recepten = []
 
     # Maak een nieuw recept aan
@@ -87,72 +120,112 @@ def main():
 
     recepten.append(recept4)
 
-    # Laat gebruiker kiezen welk recept
-    print("Kies een recept uit de lijst:")
-    for idx, r in enumerate(recepten, start=1):
-        print(f"{idx}. {r._Recept__naam}")
-    keuze = input("Typ het nummer van het recept of 'alle' om alles te tonen: ").strip().lower()
-    if keuze == 'alle':
-        geselecteerde_recepten = recepten
-    else:
-        try:
-            num = int(keuze)
-            if 1 <= num <= len(recepten):
-                geselecteerde_recepten = [recepten[num-1]]
-            else:
-                print("Ongeldig nummer, alle recepten worden getoond.")
+    while True:
+        print("\nMenu:")
+        print("1. Bekijk recepten")
+        print("2. Voeg een nieuw recept toe")
+        print("3. Verwijder een recept")
+        print("4. Exit")
+        keuze = input("Kies een optie: ").strip()
+
+        if keuze == "1":
+            if not recepten:
+                print("Geen recepten beschikbaar.")
+                continue
+            # Laat gebruiker kiezen welk recept
+            print("Kies een recept uit de lijst:")
+            for index, r in enumerate(recepten, start=1):
+                print(f"{index}. {r._Recept__naam}")
+            keuze_rec = input("Typ het nummer van het recept of 'alle' om alles te tonen: ").strip().lower()
+            if keuze_rec == 'alle':
                 geselecteerde_recepten = recepten
-        except ValueError:
-            print("Ongeldige invoer, alle recepten worden getoond.")
-            geselecteerde_recepten = recepten
-
-    # Vraag het aantal personen (basis hoeveelheden zijn nu per persoon)
-    try:
-        aantal_personen = int(input("Voor hoeveel personen wil je het recept maken? "))
-        if aantal_personen < 1:
-            aantal_personen = 1
-    except ValueError:
-        aantal_personen = 1
-
-    # Vraag of plantaardig alternatief gewenst is
-    plantaardig = input("Wil je een plantaardige versie? (ja/nee): ").strip().lower() == "ja"
-
-    # Print geselecteerde recepten met aangepaste hoeveelheden en kcal per persoon
-    for recept in geselecteerde_recepten:
-        print(f"\nIngrediënten voor {recept._Recept__naam} (voor {aantal_personen} personen):")
-        totale_kcal_per_person = 0
-        for ingredient in recept.get_ingredienten():
-            # Bepaal welke naam gebruiken
-            if plantaardig and ingredient.plantaardig_alternatief:
-                naam = str(ingredient.plantaardig_alternatief)
-                alternatief_str = " (plantaardig alternatief)"
             else:
-                naam = ingredient.naam
-                alternatief_str = ""
+                try:
+                    num = int(keuze_rec)
+                    if 1 <= num <= len(recepten):
+                        geselecteerde_recepten = [recepten[num-1]]
+                    else:
+                        print("Ongeldig nummer, alle recepten worden getoond.")
+                        geselecteerde_recepten = recepten
+                except ValueError:
+                    print("Ongeldige invoer, alle recepten worden getoond.")
+                    geselecteerde_recepten = recepten
 
-            # Bereken totale hoeveelheid voor het gekozen aantal personen
+            # Vraag het aantal personen (basis hoeveelheden zijn nu per persoon)
             try:
-                hoeveelheid_per_person = float(ingredient.hoeveelheid)
-                hoeveelheid_totaal = hoeveelheid_per_person * aantal_personen
-                hoeveelheid_totaal = int(hoeveelheid_totaal) if float(hoeveelheid_totaal).is_integer() else round(hoeveelheid_totaal, 2)
-            except (ValueError, TypeError):
-                hoeveelheid_totaal = ingredient.hoeveelheid
+                aantal_personen = int(input("Voor hoeveel personen wil je het recept maken? "))
+                if aantal_personen < 1:
+                    aantal_personen = 1
+            except ValueError:
+                aantal_personen = 1
 
-            # Bereken kcal per persoon (ingredient.kcal is basis per persoon)
+            # Vraag of plantaardig alternatief gewenst is
+            plantaardig = input("Wil je een plantaardige versie? (ja/nee): ").strip().lower() == "ja"
+
+            # Print geselecteerde recepten met aangepaste hoeveelheden en kcal per persoon
+            for recept in geselecteerde_recepten:
+                print(f"\nIngrediënten voor {recept._Recept__naam} (voor {aantal_personen} personen):")
+                totale_kcal_per_person = 0
+                for ingredient in recept.get_ingredienten():
+                    # Bepaal welke naam gebruiken
+                    if plantaardig and ingredient.plantaardig_alternatief:
+                        naam = str(ingredient.plantaardig_alternatief)
+                        alternatief_str = " (plantaardig alternatief)"
+                    else:
+                        naam = ingredient.naam
+                        alternatief_str = ""
+
+                    # Bereken totale hoeveelheid voor het gekozen aantal personen
+                    try:
+                        hoeveelheid_per_person = float(ingredient.hoeveelheid)
+                        hoeveelheid_totaal = hoeveelheid_per_person * aantal_personen
+                        hoeveelheid_totaal = int(hoeveelheid_totaal) if float(hoeveelheid_totaal).is_integer() else round(hoeveelheid_totaal, 2)
+                    except (ValueError, TypeError):
+                        hoeveelheid_totaal = ingredient.hoeveelheid
+
+                    # Bereken kcal per persoon (ingredient.kcal is basis per persoon)
+                    try:
+                        kcal_per_person = float(ingredient.kcal)
+                    except (ValueError, TypeError):
+                        kcal_per_person = 0
+                    totale_kcal_per_person += kcal_per_person
+
+                    print(f"- {hoeveelheid_totaal} {ingredient.eenheid} {naam}{alternatief_str} [{int(kcal_per_person)} kcal p.p.]")
+
+                print("Stappen:")
+                for stap in recept.get_stappen():
+                    print(f"- {stap.beschrijving}")
+
+                # Toon totale kcal per persoon (som van kcal per ingrediënt)
+                print(f"Totale kcal per persoon: {int(totale_kcal_per_person)} kcal")
+
+        elif keuze == "2":
+            nieuw_recept = voeg_recept_toe()
+            recepten.append(nieuw_recept)
+            print("Recept toegevoegd!")
+
+        elif keuze == "3":
+            if not recepten:
+                print("Geen recepten beschikbaar om te verwijderen.")
+                continue
+            print("Kies een recept om te verwijderen:")
+            for index, r in enumerate(recepten, start=1):
+                print(f"{index}. {r._Recept__naam}")
             try:
-                kcal_per_person = float(ingredient.kcal)
-            except (ValueError, TypeError):
-                kcal_per_person = 0
-            totale_kcal_per_person += kcal_per_person
+                num = int(input("Typ het nummer van het recept om te verwijderen: ").strip())
+                if 1 <= num <= len(recepten):
+                    verwijderd_recept = recepten.pop(num-1)
+                    print(f"Recept '{verwijderd_recept._Recept__naam}' verwijderd!")
+                else:
+                    print("Ongeldig nummer.")
+            except ValueError:
+                print("Ongeldige invoer.")
 
-            print(f"- {hoeveelheid_totaal} {ingredient.eenheid} {naam}{alternatief_str} [{int(kcal_per_person)} kcal p.p.]")
+        elif keuze == "4":
+            break
 
-        print("Stappen:")
-        for stap in recept.get_stappen():
-            print(f"- {stap.beschrijving}")
-
-        # Toon totale kcal per persoon (som van kcal per ingrediënt)
-        print(f"Totale kcal per persoon: {int(totale_kcal_per_person)} kcal")
+        else:
+            print("Ongeldige keuze.")
 
 
 if __name__ == "__main__":
